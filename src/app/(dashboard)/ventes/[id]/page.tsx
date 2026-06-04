@@ -29,7 +29,7 @@ export default function VenteDetailPage({ params }: { params: Promise<{ id: stri
   const { id } = use(params)
   const router = useRouter()
   const { toast } = useToast()
-  const { sales, clients, settings, updateSale, deleteSale, repayDebt } = useAppStore()
+  const { sales, clients, settings, updateSale, deleteSale, repayDebt, validateDraft, cancelSale } = useAppStore()
   
   const sale = sales.find(s => s.id === id) || sales[0]
   const client = clients.find(c => c.id === sale?.clientId)
@@ -106,7 +106,6 @@ export default function VenteDetailPage({ params }: { params: Promise<{ id: stri
   }
 
   const handleValidateDraft = async () => {
-    const { validateDraft } = useAppStore.getState()
     await validateDraft(sale.id)
     toast({
       title: "Brouillon validé",
@@ -116,7 +115,6 @@ export default function VenteDetailPage({ params }: { params: Promise<{ id: stri
   }
 
   const handleCancelSale = async () => {
-    const { cancelSale } = useAppStore.getState()
     await cancelSale(sale.id)
     toast({
       title: "Vente annulée",
