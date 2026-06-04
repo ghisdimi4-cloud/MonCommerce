@@ -95,7 +95,7 @@ export const downloadInvoicePDF = (sale: Sale, client: Client | undefined, setti
 
   // --- TABLE (ITEMS) ---
   const tableColumn = ["Description", "Quantité", "Prix unitaire (FCFA)", "Total (FCFA)"]
-  const tableRows = []
+  const tableRows: any[][] = []
 
   sale.items.forEach(item => {
     const row = [
