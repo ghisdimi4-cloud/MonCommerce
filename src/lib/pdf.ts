@@ -42,8 +42,8 @@ export const downloadInvoicePDF = (sale: Sale, client: Client | undefined, setti
   const doc = new jsPDF()
 
   // --- COULEURS ---
-  const primaryColor = [16, 185, 129] // Emerald 500
-  const textColor = [51, 65, 85] // Slate 700
+  const primaryColor: [number, number, number] = [16, 185, 129] // Emerald 500
+  const textColor: [number, number, number] = [51, 65, 85] // Slate 700
 
   // --- HEADER ---
   // Logo placeholder (ou initiales)
@@ -113,21 +113,21 @@ export const downloadInvoicePDF = (sale: Sale, client: Client | undefined, setti
     body: tableRows,
     theme: 'plain',
     headStyles: {
-      fillColor: [248, 250, 252], // Slate 50
-      textColor: [100, 116, 139], // Slate 500
+      fillColor: [248, 250, 252] as [number, number, number], // Slate 50
+      textColor: [100, 116, 139] as [number, number, number], // Slate 500
       fontStyle: 'bold',
       halign: 'left'
     },
     bodyStyles: {
-      textColor: textColor,
-      lineColor: [226, 232, 240], // Slate 200
+      textColor: textColor as [number, number, number],
+      lineColor: [226, 232, 240] as [number, number, number], // Slate 200
       lineWidth: { bottom: 0.1 }
     },
     columnStyles: {
       0: { cellWidth: 80 },
       1: { halign: 'center' },
       2: { halign: 'right' },
-      3: { halign: 'right', fontStyle: 'bold', textColor: [15, 23, 42] }
+      3: { halign: 'right', fontStyle: 'bold', textColor: [15, 23, 42] as [number, number, number] }
     },
     margin: { top: 10 }
   })

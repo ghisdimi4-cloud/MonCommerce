@@ -39,20 +39,22 @@ type StoreContextType = {
 
 const StoreContext = createContext<StoreContextType | undefined>(undefined)
 
+const defaultSettings: Settings = {
+  companyName: "MonCommerce App",
+  phone: "+225 00 00 00 00",
+  address: "Abidjan, Côte d'Ivoire",
+  paymentMobileMoney: true,
+  paymentCash: true,
+  paymentCard: false
+}
+
 export function StoreProvider({ children }: { children: ReactNode }) {
   const [userEmail, setUserEmail] = useState<string | null>(null)
   const [clients, setClients] = useState<Client[]>([])
   const [products, setProducts] = useState<Product[]>([])
   const [sales, setSales] = useState<Sale[]>([])
   const [activities, setActivities] = useState<Activity[]>([])
-  const [settings, setSettings] = useState<Settings>({
-    companyName: "MonCommerce App",
-    phone: "+225 00 00 00 00",
-    address: "Abidjan, Côte d'Ivoire",
-    paymentMobileMoney: true,
-    paymentCash: true,
-    paymentCard: false
-  })
+  const [settings, setSettings] = useState<Settings>(defaultSettings)
 
   useEffect(() => {
     const fetchData = async () => {
