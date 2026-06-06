@@ -24,6 +24,22 @@ const item: any = {
   show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 24 } }
 }
 
+const getProductImageUrl = (product: any) => {
+  if (product.image) return product.image;
+  
+  const categoryMap: Record<string, string> = {
+    "Cosmétique": "cosmetics,beauty",
+    "Alimentation": "food,grocery",
+    "Mode": "fashion,clothing",
+    "Électronique": "electronics,gadget"
+  };
+  
+  const keywords = categoryMap[product.category] || "product";
+  const lockId = product.id.replace(/\D/g, '') || (product.name.length * 3);
+  
+  return `https://loremflickr.com/100/100/${keywords}?lock=${lockId}`;
+}
+
 export default function ProduitsPage() {
   const store = useAppStore()
   const { products, sales, clients, settings, addProduct, restockProduct, updateProduct, deleteProduct } = store
@@ -284,7 +300,7 @@ export default function ProduitsPage() {
                             {product.image ? (
                               <img src={product.image} alt={product.name} className="h-full w-full object-cover" />
                             ) : (
-                              <img src={`https://loremflickr.com/100/100/${encodeURIComponent(product.name.split(' ')[0].toLowerCase())},product/all?lock=${product.id.charCodeAt(product.id.length-1)}`} alt={product.name} className="h-full w-full object-cover" />
+                              <img src={getProductImageUrl(product)} alt={product.name} className="h-full w-full object-cover" />
                             )}
                           </div>
                           <div>
@@ -570,7 +586,7 @@ export default function ProduitsPage() {
                       {selectedProduct.image ? (
                         <img src={selectedProduct.image} alt={selectedProduct.name} className="h-full w-full object-cover" />
                       ) : (
-                        <img src={`https://loremflickr.com/100/100/${encodeURIComponent(selectedProduct.name.split(' ')[0].toLowerCase())},product/all?lock=${selectedProduct.id.charCodeAt(selectedProduct.id.length-1)}`} alt={selectedProduct.name} className="h-full w-full object-cover" />
+                        <img src={getProductImageUrl(selectedProduct)} alt={selectedProduct.name} className="h-full w-full object-cover" />
                       )}
                     </div>
                     <h4 className="font-bold text-xl text-slate-900">{selectedProduct.name}</h4>
