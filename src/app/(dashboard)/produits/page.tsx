@@ -56,7 +56,17 @@ const getCategoryColorClass = (category: string) => {
 const getLocalFallbackImage = (product: any) => {
   const name = (product.name || "").toLowerCase();
   const category = (product.category || "").toLowerCase();
-  if (/(pack|boisson|bouteille|cannette|canette|eau|jus|bière|liqueur|coca|soda|vin)/.test(name)) return "/images/packaging/bottles.png";
+  
+  // 1. Matches très spécifiques pour les produits de démonstration du client
+  if (name.includes("coca-cola") || name.includes("coca cola")) return "/images/products/coca_cola.png";
+  if (name.includes("farine de blé") || name.includes("farine de ble")) return "/images/products/farine.png";
+  if (name.includes("riz parfumé") || name.includes("riz parfume")) return "/images/products/riz.png";
+  if (name === "sucre" || name.includes("sac de sucre")) return "/images/products/sucre.png";
+  if (name.includes("tomate en boîte gino") || name.includes("tomate gino") || name === "gino") return "/images/products/tomate.png";
+  if (name.includes("vin château de france") || name.includes("vin chateau")) return "/images/products/vin.png";
+
+  // 2. Fallbacks génériques par défaut
+  if (/(pack|boisson|bouteille|cannette|canette|eau|jus|bière|liqueur|soda|vin)/.test(name)) return "/images/packaging/bottles.png";
   if (/(^|\s)(sac|maïs|mais|sucre|riz|farine|blé|haricot|mil|sorgho|ciment)(\s|$)/.test(name)) return "/images/packaging/sacks.png";
   if (/(carton|tomate|spaghetti|pâte|savon|boîte|conserve|lait)/.test(name) && !/(lait de beauté)/.test(name)) return "/images/packaging/cartons.png";
   if (category.includes('cosmétique') || /(crème|pommade|parfum|beauté|lotion)/.test(name)) return "/images/packaging/cosmetics.png";
