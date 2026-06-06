@@ -422,7 +422,7 @@ export default function ProduitsPage() {
                     <tr key={product.id} className="group hover:bg-slate-50/50 transition-colors bg-white">
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-4">
-                          <div className="h-14 w-14 rounded-2xl flex items-center justify-center border border-slate-200/50 shadow-sm group-hover:shadow-md shrink-0 overflow-hidden bg-white">
+                          <div className="h-14 w-14 rounded-2xl flex items-center justify-center border border-slate-200/50 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-300 shrink-0 overflow-hidden bg-white">
                             <ProductImage product={product} />
                           </div>
                           <div>
@@ -451,11 +451,17 @@ export default function ProduitsPage() {
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex justify-center items-center gap-1">
-                          <Button onClick={() => openEditModal(product)} variant="ghost" size="icon" className="h-9 w-9 text-slate-400 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-colors border border-transparent hover:border-slate-200">
+                          <Button onClick={() => handleRestock(product.id, product.name)} variant="ghost" size="icon" className="h-8 w-8 text-slate-400 hover:text-success hover:bg-success/10 rounded-lg transition-colors" title="Réapprovisionner">
+                            <PackagePlus className="h-4 w-4" />
+                          </Button>
+                          <Button onClick={() => openViewModal(product)} variant="ghost" size="icon" className="h-8 w-8 text-slate-400 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors" title="Voir détails">
+                            <Eye className="h-4 w-4" />
+                          </Button>
+                          <Button onClick={() => openEditModal(product)} variant="ghost" size="icon" className="h-8 w-8 text-slate-400 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-colors border border-transparent hover:border-slate-200" title="Modifier">
                             <Edit className="h-4 w-4" />
                           </Button>
-                          <Button variant="ghost" size="icon" className="h-9 w-9 text-slate-400 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-colors border border-transparent hover:border-slate-200">
-                            <MoreHorizontal className="h-4 w-4" />
+                          <Button onClick={() => handleDelete(product.id, product.name)} variant="ghost" size="icon" className="h-8 w-8 text-slate-400 hover:text-danger hover:bg-danger/10 rounded-lg transition-colors" title="Supprimer">
+                            <Trash2 className="h-4 w-4" />
                           </Button>
                         </div>
                       </td>
