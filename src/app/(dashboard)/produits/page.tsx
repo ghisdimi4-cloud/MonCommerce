@@ -31,29 +31,27 @@ const getProductImageUrl = (product: any) => {
   const category = (product.category || "").toLowerCase();
   
   // 1. PACKS & BOUTEILLES (Boisson, bouteille, cannette, eau, jus...)
-  // Placé en premier pour que "Boisson sucrerie" soit identifié comme boisson avant "sucre"
   if (/(pack|boisson|bouteille|cannette|canette|eau|jus|bière|liqueur|coca|soda|vin)/.test(name)) {
-    return "https://images.unsplash.com/photo-1606854428728-5fe3eea23475?w=200&h=200&fit=crop";
+    return "/images/packaging/bottles.png";
   }
 
   // 2. SACS (Maïs, sucre, riz, farine...)
-  // Utilisation d'espaces ou début/fin de chaîne pour éviter "sucrerie"
   if (/(^|\s)(sac|maïs|mais|sucre|riz|farine|blé|haricot|mil|sorgho|ciment)(\s|$)/.test(name)) {
-    return "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=200&h=200&fit=crop";
+    return "/images/packaging/sacks.png";
   }
   
   // 3. CARTONS (Tomates, spaghetti, pâtes, savon, boîte...)
   if (/(carton|tomate|spaghetti|pâte|savon|boîte|conserve|lait)/.test(name) && !/(lait de beauté)/.test(name)) {
-    return "https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=200&h=200&fit=crop";
+    return "/images/packaging/cartons.png";
   }
   
   // 4. Cosmétique (Pommade, parfum, etc.)
   if (category.includes('cosmétique') || /(crème|pommade|parfum|beauté|lotion)/.test(name)) {
-    return "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=200&h=200&fit=crop";
+    return "/images/packaging/cosmetics.png";
   }
   
-  // 5. Défaut / Autres conditionnements (Boîte générique propre)
-  return "https://images.unsplash.com/photo-1605600659873-d808a1d8f1d3?w=200&h=200&fit=crop";
+  // 5. Défaut / Autres conditionnements
+  return "/images/packaging/default.png";
 }
 
 export default function ProduitsPage() {
