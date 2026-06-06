@@ -19,7 +19,7 @@ import {
 } from "lucide-react"
 
 const routes = [
-  { label: "Dashboard", icon: LayoutDashboard, href: "/" },
+  { label: "Dashboard", icon: LayoutDashboard, href: "/dashboard" },
   { label: "Ventes", icon: ShoppingCart, href: "/ventes" },
   { label: "Produits", icon: Package, href: "/produits" },
   { label: "Stock", icon: Boxes, href: "/stock" },
@@ -36,7 +36,7 @@ export function Sidebar() {
   return (
     <div className="space-y-4 py-4 flex flex-col h-full bg-white/80 backdrop-blur-xl border-r border-slate-100/50 shadow-[2px_0_12px_rgba(0,0,0,0.02)]">
       <div className="px-4 py-4 flex-1 flex flex-col">
-        <Link href="/" className="flex items-center pl-2 mb-10 group">
+        <Link href="/dashboard" className="flex items-center pl-2 mb-10 group">
           <div className="h-8 w-8 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center mr-3 shadow-sm shadow-primary-500/20 group-hover:shadow-primary-500/40 group-hover:scale-105 transition-all duration-300">
             <span className="text-white font-bold text-lg">M</span>
           </div>
