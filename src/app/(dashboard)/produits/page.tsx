@@ -30,19 +30,21 @@ const getProductImageUrl = (product: any) => {
   const name = (product.name || "").toLowerCase();
   const category = (product.category || "").toLowerCase();
   
-  // 1. SACS (Maïs, sucre, riz, farine...)
-  if (/(sac|maïs|mais|sucre|riz|farine|blé|haricot|mil|sorgho|ciment)/.test(name)) {
+  // 1. PACKS & BOUTEILLES (Boisson, bouteille, cannette, eau, jus...)
+  // Placé en premier pour que "Boisson sucrerie" soit identifié comme boisson avant "sucre"
+  if (/(pack|boisson|bouteille|cannette|canette|eau|jus|bière|liqueur|coca|soda|vin)/.test(name)) {
+    return "https://images.unsplash.com/photo-1606854428728-5fe3eea23475?w=200&h=200&fit=crop";
+  }
+
+  // 2. SACS (Maïs, sucre, riz, farine...)
+  // Utilisation d'espaces ou début/fin de chaîne pour éviter "sucrerie"
+  if (/(^|\s)(sac|maïs|mais|sucre|riz|farine|blé|haricot|mil|sorgho|ciment)(\s|$)/.test(name)) {
     return "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=200&h=200&fit=crop";
   }
   
-  // 2. CARTONS (Tomates, vin, spaghetti, pâtes, savon, boîte...)
-  if (/(carton|tomate|vin|spaghetti|pâte|savon|boîte|conserve|lait)/.test(name) && !/(lait de beauté)/.test(name)) {
+  // 3. CARTONS (Tomates, spaghetti, pâtes, savon, boîte...)
+  if (/(carton|tomate|spaghetti|pâte|savon|boîte|conserve|lait)/.test(name) && !/(lait de beauté)/.test(name)) {
     return "https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=200&h=200&fit=crop";
-  }
-  
-  // 3. PACKS & BOUTEILLES (Boisson, bouteille, cannette, eau, jus...)
-  if (/(pack|boisson|bouteille|cannette|canette|eau|jus|bière|liqueur|coca|soda)/.test(name)) {
-    return "https://images.unsplash.com/photo-1606854428728-5fe3eea23475?w=200&h=200&fit=crop";
   }
   
   // 4. Cosmétique (Pommade, parfum, etc.)
