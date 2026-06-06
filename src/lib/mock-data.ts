@@ -23,6 +23,7 @@ export type Product = {
   price: number
   purchasePrice: number
   stock: number
+  unit?: string
   category: string
   status: string
   image: string
