@@ -280,8 +280,12 @@ export default function ProduitsPage() {
                     <tr key={product.id} className="group hover:bg-slate-50/50 transition-colors">
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3">
-                          <div className="h-10 w-10 rounded-xl bg-slate-100 text-slate-400 flex items-center justify-center border border-slate-200/50 group-hover:scale-105 transition-transform shrink-0">
-                            <ImageIcon className="h-5 w-5" />
+                          <div className="h-10 w-10 rounded-xl bg-slate-100 text-slate-400 flex items-center justify-center border border-slate-200/50 group-hover:scale-105 transition-transform shrink-0 overflow-hidden">
+                            {product.image ? (
+                              <img src={product.image} alt={product.name} className="h-full w-full object-cover" />
+                            ) : (
+                              <img src={`https://loremflickr.com/100/100/${encodeURIComponent(product.name.split(' ')[0].toLowerCase())},product/all?lock=${product.id.charCodeAt(product.id.length-1)}`} alt={product.name} className="h-full w-full object-cover" />
+                            )}
                           </div>
                           <div>
                             <p className="font-semibold text-slate-900 group-hover:text-primary-600 transition-colors">{product.name}</p>
@@ -562,8 +566,12 @@ export default function ProduitsPage() {
                 </div>
                 <CardContent className="p-6 space-y-4">
                   <div className="text-center pb-4">
-                    <div className="h-16 w-16 mx-auto rounded-2xl bg-slate-100 text-slate-400 flex items-center justify-center border border-slate-200/50 mb-3">
-                      <ImageIcon className="h-8 w-8" />
+                    <div className="h-16 w-16 mx-auto rounded-2xl bg-slate-100 text-slate-400 flex items-center justify-center border border-slate-200/50 mb-3 overflow-hidden">
+                      {selectedProduct.image ? (
+                        <img src={selectedProduct.image} alt={selectedProduct.name} className="h-full w-full object-cover" />
+                      ) : (
+                        <img src={`https://loremflickr.com/100/100/${encodeURIComponent(selectedProduct.name.split(' ')[0].toLowerCase())},product/all?lock=${selectedProduct.id.charCodeAt(selectedProduct.id.length-1)}`} alt={selectedProduct.name} className="h-full w-full object-cover" />
+                      )}
                     </div>
                     <h4 className="font-bold text-xl text-slate-900">{selectedProduct.name}</h4>
                     <p className="text-slate-500 text-sm">{selectedProduct.category}</p>

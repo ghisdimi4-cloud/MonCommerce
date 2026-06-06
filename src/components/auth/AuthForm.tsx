@@ -434,9 +434,9 @@ export function AuthForm({ defaultTab = "login" }: { defaultTab?: "login" | "reg
               </div>
               <div className="flex items-center gap-2 shrink-0">
                 <div className="flex -space-x-2">
-                  <div className="w-6 h-6 rounded-full bg-slate-200 border-2 border-white"></div>
-                  <div className="w-6 h-6 rounded-full bg-slate-300 border-2 border-white"></div>
-                  <div className="w-6 h-6 rounded-full bg-slate-400 border-2 border-white"></div>
+                  <div className="w-6 h-6 rounded-full bg-slate-200 border-2 border-white overflow-hidden"><img src="https://i.pravatar.cc/100?img=33" alt="Utilisateur" className="w-full h-full object-cover" /></div>
+                  <div className="w-6 h-6 rounded-full bg-slate-300 border-2 border-white overflow-hidden"><img src="https://i.pravatar.cc/100?img=47" alt="Utilisateur" className="w-full h-full object-cover" /></div>
+                  <div className="w-6 h-6 rounded-full bg-slate-400 border-2 border-white overflow-hidden"><img src="https://i.pravatar.cc/100?img=12" alt="Utilisateur" className="w-full h-full object-cover" /></div>
                 </div>
                 <div className="text-xs font-bold text-success bg-success/10 px-2 py-0.5 rounded-full">+10K</div>
               </div>
