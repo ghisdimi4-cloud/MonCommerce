@@ -134,7 +134,11 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     setActivities(prev => [newActivity, ...prev])
 
     const { purchasePrice, unit, ...rest } = product
-    await supabase.from('products').insert([{ ...rest, purchaseprice: purchasePrice }])
+    const { error } = await supabase.from('products').insert([{ ...rest, purchaseprice: purchasePrice }])
+    if (error) {
+      console.error("DB Insert Error:", error)
+      alert("Erreur base de données: " + error.message)
+    }
     await supabase.from('activities').insert([newActivity])
   }
 

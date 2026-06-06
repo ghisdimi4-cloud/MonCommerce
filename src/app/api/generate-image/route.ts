@@ -38,7 +38,7 @@ export async function POST(request: Request) {
     // 2. Call pollinations.ai (Free, no API key required, generates high-quality images via URL)
     // We add a random seed to avoid caching on their CDN if we want a fresh image, but here we want uniqueness.
     const seed = Math.floor(Math.random() * 1000000);
-    const imageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(fullPrompt)}?width=800&height=800&seed=${seed}`;
+    const imageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(fullPrompt)}`;
 
     // 3. Fetch the image to store it in Supabase
     const imageResponse = await fetch(imageUrl, {
