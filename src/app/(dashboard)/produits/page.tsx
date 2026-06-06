@@ -52,63 +52,15 @@ const getCategoryColorClass = (category: string) => {
   return "from-slate-50 to-slate-100 text-slate-700";
 };
 
-// --- ANCIENNE LOGIQUE DE FALLBACK LOCALE CONSERVÉE POUR LES PRODUITS DE DÉMO ---
-const getLocalFallbackImage = (product: any) => {
-  const name = (product.name || "").toLowerCase();
-  const category = (product.category || "").toLowerCase();
-  
-  // 1. Matches très spécifiques pour les produits de démonstration du client
-  if (name.includes("coca-cola") || name.includes("coca cola")) return "/images/products/coca_cola.png";
-  if (name.includes("farine de blé") || name.includes("farine de ble")) return "/images/products/farine.png";
-  if (name.includes("riz parfumé") || name.includes("riz parfume")) return "/images/products/riz.png";
-  if (name === "sucre" || name.includes("sac de sucre")) return "/images/products/sucre.png";
-  if (name.includes("tomate en boîte gino") || name.includes("tomate gino") || name === "gino") return "/images/products/tomate.png";
-  if (name.includes("vin château de france") || name.includes("vin chateau")) return "/images/products/vin.png";
-
-  // 2. Fallbacks génériques par défaut
-  if (/(pack|boisson|bouteille|cannette|canette|eau|jus|bière|liqueur|soda|vin)/.test(name)) return "/images/packaging/bottles.png";
-  if (/(^|\s)(sac|maïs|mais|sucre|riz|farine|blé|haricot|mil|sorgho|ciment)(\s|$)/.test(name)) return "/images/packaging/sacks.png";
-  if (/(carton|tomate|spaghetti|pâte|savon|boîte|conserve|lait)/.test(name) && !/(lait de beauté)/.test(name)) return "/images/packaging/cartons.png";
-  if (category.includes('cosmétique') || /(crème|pommade|parfum|beauté|lotion)/.test(name)) return "/images/packaging/cosmetics.png";
-  return null;
-}
-
 const ProductImage = ({ product }: { product: any }) => {
-  const [imgError, setImgError] = useState(false);
-  const localFallback = getLocalFallbackImage(product);
-  
-  // Utiliser l'image IA générée, sinon le fallback local, sinon erreur
-  const displayImage = product.image && product.image !== "loading" && product.image !== "error" 
-    ? product.image 
-    : (localFallback && !imgError ? localFallback : null);
-
-  const showPremiumPlaceholder = !displayImage || product.image === "error" || imgError;
-
-  if (showPremiumPlaceholder || product.image === "loading") {
-    return (
-      <div className={`h-full w-full bg-gradient-to-br ${getCategoryColorClass(product.category)} flex items-center justify-center relative shadow-inner group-hover:scale-105 transition-transform duration-300`}>
-        {product.image === "loading" ? (
-          <div className="absolute inset-0 flex items-center justify-center bg-white/40 backdrop-blur-[2px] z-20">
-            <Loader2 className="w-5 h-5 animate-spin text-primary-600" />
-          </div>
-        ) : null}
-        <span className="font-extrabold text-3xl opacity-10 absolute pointer-events-none">{product.name.charAt(0).toUpperCase()}</span>
-        <div className="z-10 opacity-70 group-hover:opacity-100 transition-opacity drop-shadow-sm">
-           {getCategoryIcon(product.category)}
-        </div>
-      </div>
-    )
-  }
-
   return (
-    <img 
-      src={displayImage} 
-      alt={product.name} 
-      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" 
-      onError={() => setImgError(true)} 
-      loading="lazy" 
-    />
-  );
+    <div className={`h-full w-full bg-gradient-to-br ${getCategoryColorClass(product.category)} flex items-center justify-center relative shadow-inner group-hover:scale-105 transition-transform duration-300`}>
+      <span className="font-extrabold text-3xl opacity-10 absolute pointer-events-none">{product.name.charAt(0).toUpperCase()}</span>
+      <div className="z-10 opacity-70 group-hover:opacity-100 transition-opacity drop-shadow-sm">
+         {getCategoryIcon(product.category)}
+      </div>
+    </div>
+  )
 }
 
 export default function ProduitsPage() {
@@ -202,38 +154,10 @@ export default function ProduitsPage() {
     setNewProduct({ name: "", category: "Alimentation", price: "", purchasePrice: "", stock: "", unit: "Unité" })
     
     toast({
-      title: "Génération en cours...",
-      description: "Votre produit a été ajouté. L'IA génère le visuel premium en arrière-plan.",
+      title: "Produit ajouté",
+      description: "Votre produit a été ajouté avec succès.",
       type: "success"
     })
-
-    // 2. Appel à l'API de génération d'image
-    try {
-      const res = await fetch('/api/generate-image', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
-        body: JSON.stringify({ productName: productData.name, category: productData.category })
-      });
-      
-      if (!res.ok) throw new Error("API call failed");
-      const data = await res.json();
-      
-      if (data.imageUrl) {
-        // Mettre à jour le produit avec la nouvelle URL
-        updateProduct({ ...productData, image: data.imageUrl });
-        toast({
-          title: "Image générée ! ✨",
-          description: "Le visuel premium a été ajouté à votre produit.",
-          type: "success"
-        });
-      } else {
-        updateProduct({ ...productData, image: "error" });
-      }
-    } catch (error) {
-      console.error(error);
-      updateProduct({ ...productData, image: "error" });
-    }
   }
 
   const handleDelete = (id: string, name: string) => {
