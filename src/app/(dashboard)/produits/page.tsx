@@ -402,9 +402,9 @@ export default function ProduitsPage() {
 
         {/* Data Table */}
         <motion.div variants={item}>
-          <Card className="bg-white border-0 overflow-hidden shadow-sm rounded-2xl">
-            <div className="overflow-x-auto min-w-[800px]">
-              <table className="w-full text-sm text-left">
+          <Card className="bg-white border-0 shadow-sm rounded-2xl overflow-hidden">
+            <div className="overflow-x-auto w-full">
+              <table className="w-full text-sm text-left min-w-[900px]">
                 <thead className="text-xs text-slate-500 uppercase bg-white border-b border-slate-100/50">
                   <tr>
                     <th className="px-6 py-5 font-semibold tracking-wider">Produit</th>
@@ -422,7 +422,7 @@ export default function ProduitsPage() {
                     <tr key={product.id} className="group hover:bg-slate-50/50 transition-colors bg-white">
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-4">
-                          <div className="h-14 w-14 rounded-2xl flex items-center justify-center border border-slate-200/50 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-300 shrink-0 overflow-hidden bg-white">
+                          <div className="h-14 w-14 rounded-full flex items-center justify-center border-2 border-white shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-300 shrink-0 overflow-hidden bg-slate-50 ring-1 ring-slate-100">
                             <ProductImage product={product} />
                           </div>
                           <div>

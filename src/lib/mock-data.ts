@@ -66,26 +66,74 @@ mockClients[4] = { id: "c5", name: "Client Anonyme", phone: "Non renseigné", de
 mockClients[5] = { id: "c6", name: "Aminata Diallo", phone: "+225 08 11 22 33", debt: 5000, lastActivity: "09/03/2026", avatar: "A" }
 
 const categories = ["Alimentation", "Cosmétique", "Mode", "Électronique", "Maison"]
-export const mockProducts: Product[] = Array.from({ length: 25 }).map((_, i) => {
-  const stock = Math.floor(Math.random() * 50)
-  return {
-    id: `p${i + 1}`,
-    name: `Produit Test ${i + 1}`,
-    price: Math.floor(Math.random() * 20 + 1) * 500,
-    purchasePrice: Math.floor(Math.random() * 10 + 1) * 300,
-    stock,
-    category: categories[Math.floor(Math.random() * categories.length)],
-    status: stock === 0 ? "Rupture" : stock < 10 ? "Stock faible" : "Disponible",
-    image: ""
+export const mockProducts: Product[] = [
+  {
+    id: "P1780745816600",
+    name: "Boisson sucrerie coca-cola",
+    category: "Alimentation",
+    price: 3500,
+    purchasePrice: 2800,
+    stock: 45,
+    unit: "Pack",
+    status: "Disponible",
+    image: "https://image.pollinations.ai/prompt/Professional%20studio%20photography%20of%20a%20premium%20pack%20of%20coca-cola%20beverage,%20clean%20white%20background,%203/4%20angle?width=400&height=400&nologo=true"
+  },
+  {
+    id: "P1780746268032",
+    name: "Farine de Blé",
+    category: "Alimentation",
+    price: 18000,
+    purchasePrice: 15000,
+    stock: 12,
+    unit: "Sac",
+    status: "Disponible",
+    image: "https://image.pollinations.ai/prompt/Professional%20studio%20photography%20of%20a%20premium%20bag%20of%20wheat%20flour,%20clean%20white%20background,%203/4%20angle?width=400&height=400&nologo=true"
+  },
+  {
+    id: "P1780597839959",
+    name: "Riz Parfumé",
+    category: "Alimentation",
+    price: 22000,
+    purchasePrice: 19500,
+    stock: 8,
+    unit: "Sac",
+    status: "Stock faible",
+    image: "https://image.pollinations.ai/prompt/Professional%20studio%20photography%20of%20a%20premium%20bag%20of%20perfumed%20rice,%20clean%20white%20background,%203/4%20angle?width=400&height=400&nologo=true"
+  },
+  {
+    id: "P1780597881078",
+    name: "Sucre",
+    category: "Alimentation",
+    price: 25000,
+    purchasePrice: 23000,
+    stock: 15,
+    unit: "Sac",
+    status: "Disponible",
+    image: "https://image.pollinations.ai/prompt/Professional%20studio%20photography%20of%20a%20premium%20bag%20of%20white%20sugar,%20clean%20white%20background,%203/4%20angle?width=400&height=400&nologo=true"
+  },
+  {
+    id: "P1780746150849",
+    name: "Tomate en boîte Gino",
+    category: "Alimentation",
+    price: 15000,
+    purchasePrice: 13500,
+    stock: 30,
+    unit: "Carton",
+    status: "Disponible",
+    image: "https://image.pollinations.ai/prompt/Professional%20studio%20photography%20of%20a%20premium%20tin%20can%20of%20Gino%20tomato%20paste,%20clean%20white%20background,%203/4%20angle?width=400&height=400&nologo=true"
+  },
+  {
+    id: "P1780746370249",
+    name: "Vin Château de France",
+    category: "Alimentation",
+    price: 4500,
+    purchasePrice: 3000,
+    stock: 0,
+    unit: "Bouteille",
+    status: "Rupture",
+    image: "https://image.pollinations.ai/prompt/Professional%20studio%20photography%20of%20a%20premium%20bottle%20of%20red%20wine,%20clean%20white%20background,%203/4%20angle?width=400&height=400&nologo=true"
   }
-})
-
-// Override some realistic products
-mockProducts[0] = { id: "p1", name: "Savon Noir", price: 1500, purchasePrice: 1000, stock: 15, category: "Cosmétique", status: "Disponible", image: "" }
-mockProducts[1] = { id: "p2", name: "Huile de Palme (1L)", price: 2500, purchasePrice: 1800, stock: 3, category: "Alimentation", status: "Stock faible", image: "" }
-mockProducts[2] = { id: "p3", name: "Riz Parfumé (25kg)", price: 18000, purchasePrice: 15000, stock: 0, category: "Alimentation", status: "Rupture", image: "" }
-mockProducts[3] = { id: "p4", name: "Tissu Wax", price: 6000, purchasePrice: 4000, stock: 45, category: "Mode", status: "Disponible", image: "" }
-mockProducts[4] = { id: "p5", name: "Beurre de Karité", price: 3000, purchasePrice: 2000, stock: 20, category: "Cosmétique", status: "Disponible", image: "" }
+]
 
 export const mockSales: Sale[] = Array.from({ length: 25 }).map((_, i) => {
   const p1 = mockProducts[Math.floor(Math.random() * mockProducts.length)]
