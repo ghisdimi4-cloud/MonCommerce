@@ -55,10 +55,7 @@ const getCategoryColorClass = (category: string) => {
 const ProductImage = ({ product }: { product: any }) => {
   return (
     <div className={`h-full w-full bg-gradient-to-br ${getCategoryColorClass(product.category)} flex items-center justify-center relative shadow-inner group-hover:scale-105 transition-transform duration-300`}>
-      <span className="font-extrabold text-3xl opacity-10 absolute pointer-events-none">{product.name.charAt(0).toUpperCase()}</span>
-      <div className="z-10 opacity-70 group-hover:opacity-100 transition-opacity drop-shadow-sm">
-         {getCategoryIcon(product.category)}
-      </div>
+      <span className="font-bold text-2xl drop-shadow-sm">{product.name ? product.name.charAt(0).toUpperCase() : '?'}</span>
     </div>
   )
 }
