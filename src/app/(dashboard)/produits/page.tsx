@@ -212,6 +212,7 @@ export default function ProduitsPage() {
       const res = await fetch('/api/generate-image', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
         body: JSON.stringify({ productName: productData.name, category: productData.category })
       });
       
