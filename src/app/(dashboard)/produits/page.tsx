@@ -27,17 +27,31 @@ const item: any = {
 const getProductImageUrl = (product: any) => {
   if (product.image) return product.image;
   
-  const categoryMap: Record<string, string> = {
-    "Cosmétique": "cosmetics,beauty",
-    "Alimentation": "food,grocery",
-    "Mode": "fashion,clothing",
-    "Électronique": "electronics,gadget"
-  };
+  const name = (product.name || "").toLowerCase();
+  const category = (product.category || "").toLowerCase();
   
-  const keywords = categoryMap[product.category] || "product";
-  const lockId = product.id.replace(/\D/g, '') || (product.name.length * 3);
+  // 1. SACS (Maïs, sucre, riz, farine...)
+  if (/(sac|maïs|mais|sucre|riz|farine|blé|haricot|mil|sorgho|ciment)/.test(name)) {
+    return "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=200&h=200&fit=crop";
+  }
   
-  return `https://loremflickr.com/100/100/${keywords}?lock=${lockId}`;
+  // 2. CARTONS (Tomates, vin, spaghetti, pâtes, savon, boîte...)
+  if (/(carton|tomate|vin|spaghetti|pâte|savon|boîte|conserve|lait)/.test(name) && !/(lait de beauté)/.test(name)) {
+    return "https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=200&h=200&fit=crop";
+  }
+  
+  // 3. PACKS & BOUTEILLES (Boisson, bouteille, cannette, eau, jus...)
+  if (/(pack|boisson|bouteille|cannette|canette|eau|jus|bière|liqueur|coca|soda)/.test(name)) {
+    return "https://images.unsplash.com/photo-1606854428728-5fe3eea23475?w=200&h=200&fit=crop";
+  }
+  
+  // 4. Cosmétique (Pommade, parfum, etc.)
+  if (category.includes('cosmétique') || /(crème|pommade|parfum|beauté|lotion)/.test(name)) {
+    return "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=200&h=200&fit=crop";
+  }
+  
+  // 5. Défaut / Autres conditionnements (Boîte générique propre)
+  return "https://images.unsplash.com/photo-1605600659873-d808a1d8f1d3?w=200&h=200&fit=crop";
 }
 
 export default function ProduitsPage() {
