@@ -76,7 +76,7 @@ export const mockProducts: Product[] = [
     stock: 45,
     unit: "Pack",
     status: "Disponible",
-    image: "https://image.pollinations.ai/prompt/Professional%20studio%20photography%20of%20a%20premium%20pack%20of%20coca-cola%20beverage,%20clean%20white%20background,%203/4%20angle?width=400&height=400&nologo=true"
+    image: "/images/products/coca_cola.png"
   },
   {
     id: "P1780746268032",
@@ -87,7 +87,7 @@ export const mockProducts: Product[] = [
     stock: 12,
     unit: "Sac",
     status: "Disponible",
-    image: "https://image.pollinations.ai/prompt/Professional%20studio%20photography%20of%20a%20premium%20bag%20of%20wheat%20flour,%20clean%20white%20background,%203/4%20angle?width=400&height=400&nologo=true"
+    image: "/images/products/farine.png"
   },
   {
     id: "P1780597839959",
@@ -98,7 +98,7 @@ export const mockProducts: Product[] = [
     stock: 8,
     unit: "Sac",
     status: "Stock faible",
-    image: "https://image.pollinations.ai/prompt/Professional%20studio%20photography%20of%20a%20premium%20bag%20of%20perfumed%20rice,%20clean%20white%20background,%203/4%20angle?width=400&height=400&nologo=true"
+    image: "/images/products/riz.png"
   },
   {
     id: "P1780597881078",
@@ -109,7 +109,7 @@ export const mockProducts: Product[] = [
     stock: 15,
     unit: "Sac",
     status: "Disponible",
-    image: "https://image.pollinations.ai/prompt/Professional%20studio%20photography%20of%20a%20premium%20bag%20of%20white%20sugar,%20clean%20white%20background,%203/4%20angle?width=400&height=400&nologo=true"
+    image: "/images/products/sucre.png"
   },
   {
     id: "P1780746150849",
@@ -120,7 +120,7 @@ export const mockProducts: Product[] = [
     stock: 30,
     unit: "Carton",
     status: "Disponible",
-    image: "https://image.pollinations.ai/prompt/Professional%20studio%20photography%20of%20a%20premium%20tin%20can%20of%20Gino%20tomato%20paste,%20clean%20white%20background,%203/4%20angle?width=400&height=400&nologo=true"
+    image: "/images/products/tomate.png"
   },
   {
     id: "P1780746370249",
@@ -131,7 +131,7 @@ export const mockProducts: Product[] = [
     stock: 0,
     unit: "Bouteille",
     status: "Rupture",
-    image: "https://image.pollinations.ai/prompt/Professional%20studio%20photography%20of%20a%20premium%20bottle%20of%20red%20wine,%20clean%20white%20background,%203/4%20angle?width=400&height=400&nologo=true"
+    image: "/images/products/vin.png"
   }
 ]
 
