@@ -133,7 +133,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     const newActivity = { id: `act_${Date.now()}`, client: "Système", type: "Nouveau Produit", amount: product.name, status: "Succès", date: "A l'instant", cost: 0 }
     setActivities(prev => [newActivity, ...prev])
 
-    const { purchasePrice, ...rest } = product
+    const { purchasePrice, unit, ...rest } = product
     await supabase.from('products').insert([{ ...rest, purchaseprice: purchasePrice }])
     await supabase.from('activities').insert([newActivity])
   }
@@ -146,7 +146,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   
   const updateProduct = async (updated: Product) => {
     setProducts((prev) => prev.map(p => p.id === updated.id ? updated : p))
-    const { purchasePrice, ...rest } = updated
+    const { purchasePrice, unit, ...rest } = updated
     await supabase.from('products').update({ ...rest, purchaseprice: purchasePrice }).eq('id', updated.id)
   }
   
