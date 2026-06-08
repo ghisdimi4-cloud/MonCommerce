@@ -45,8 +45,15 @@ const item: any = {
 
 export default function DashboardPage() {
   const currentDate = format(new Date(), "EEEE d MMMM yyyy", { locale: fr })
-  const { sales, clients, activities } = useAppStore()
+  const todayStr = format(new Date(), "dd/MM/yyyy")
+  const { sales, clients, activities, userEmail } = useAppStore()
   const [isBeneficeModalOpen, setIsBeneficeModalOpen] = useState(false)
+  
+  const getUserName = () => {
+    if (!userEmail) return "Dimitri"
+    const namePart = userEmail.split('@')[0]
+    return namePart.charAt(0).toUpperCase() + namePart.slice(1).toLowerCase().replace(/\./g, ' ')
+  }
   
   const recentActivities = activities.slice(0, 4)
   
@@ -54,10 +61,19 @@ export default function DashboardPage() {
   
   const totalSales = validSales.reduce((sum, s) => sum + s.amount, 0)
   const totalDettes = clients.reduce((sum, c) => sum + c.debt, 0)
+
+  // Calculs stricts pour aujourd'hui
+  const isToday = (dateStr: string) => dateStr === "A l'instant" || dateStr === "Aujourd'hui" || dateStr === todayStr || dateStr.includes(format(new Date(), 'dd/MM'))
+  
   const depensesDuJour = activities
+    .filter(a => a.type === "Réapprovisionnement" && isToday(a.date))
+    .reduce((sum, a) => sum + (a.cost || 0), 0)
+
+  // Bénéfice Net Total (Ventes totales * marge 35%) - Toutes les dépenses totales
+  const totalDepenses = activities
     .filter(a => a.type === "Réapprovisionnement")
     .reduce((sum, a) => sum + (a.cost || 0), 0)
-  const benefice = (totalSales * 0.35) - depensesDuJour // Simulation de 35% de marge - dépenses
+  const benefice = (totalSales * 0.35) - totalDepenses // Simulation de 35% de marge - TOUTES les dépenses
 
   // Dynamic Sales Sparkline & Growth
   const salesSparkline = validSales.slice(0, 7).map(s => s.amount).reverse()
@@ -138,7 +154,7 @@ export default function DashboardPage() {
       {/* Welcome Section */}
       <motion.div variants={item} className="flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
-          <h2 className="text-3xl font-bold text-slate-900 tracking-tight">Bonjour Dimitri 👋</h2>
+          <h2 className="text-3xl font-bold text-slate-900 tracking-tight">Bonjour {getUserName()} 👋</h2>
           <p className="text-slate-500 mt-1 capitalize">{currentDate}</p>
         </div>
         <div className="flex items-center gap-3 glass-card px-4 py-2.5 rounded-2xl w-fit">
@@ -409,8 +425,8 @@ export default function DashboardPage() {
                       <span className="text-primary-600">{(totalSales * 0.35).toLocaleString("fr-FR")}</span>
                     </div>
                     <div className="flex justify-between text-slate-600">
-                      <span>- Dépenses de stock</span>
-                      <span className="text-danger">{depensesDuJour.toLocaleString("fr-FR")}</span>
+                      <span>- Dépenses totales de stock</span>
+                      <span className="text-danger">{totalDepenses.toLocaleString("fr-FR")}</span>
                     </div>
                     <div className="h-px bg-slate-200 w-full" />
                     <div className="flex justify-between font-bold text-slate-900 text-base">
