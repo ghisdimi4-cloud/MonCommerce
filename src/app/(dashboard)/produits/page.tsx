@@ -174,6 +174,33 @@ export default function ProduitsPage() {
     })
   }
 
+  const handleRestock = (id: string, name: string) => {
+    openDialog({
+      type: 'prompt',
+      variant: 'info',
+      title: 'Réapprovisionnement',
+      description: `Combien d'unités de "${name}" souhaitez-vous ajouter au stock ?`,
+      promptPlaceholder: 'Ex: 20',
+      action: (val?: string) => {
+        const quantity = parseInt(val || "0", 10)
+        if (quantity > 0) {
+          restockProduct(id, quantity)
+          toast({
+            title: "Stock mis à jour",
+            description: `${quantity} unités ajoutées avec succès.`,
+            type: "success"
+          })
+        } else {
+          toast({
+            title: "Erreur",
+            description: "Quantité invalide.",
+            type: "error"
+          })
+        }
+      }
+    })
+  }
+
   const openEditModal = (product: any) => {
     setEditProductForm({
       id: product.id,
